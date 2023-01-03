@@ -179,7 +179,7 @@ fn ch_03_02(){
     let test : i32 = tup.1;
     let test = tup.2;
     let test = tup.3;
-    println!("tup.1={tup.1},tup.2={tup.2},tup.3={tup.3}");
+    println!("tup.1={tup.1},tup.2={tup.2},tup.3={tup.3},test={test}");
     
     //Rust中，数组长度是固定的
     let arr = [1,2,3,4,5];
