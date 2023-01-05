@@ -3,13 +3,6 @@ use rand::Rng;//随机库
 use std::cmp::Ordering;//比较和排序
 
 fn main(){
-    // let x:i32 = 1;
-    // let y = x;
-    // println!("x = {x}");
-    let s1 = String::from("hello");
-    let s2 = s1;
-    println!("s2 = {s2}");
-
     // main_enter();
 }
 
