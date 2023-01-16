@@ -42,7 +42,7 @@ impl Rectangle{
 
 //每个结构体都允许拥有多个impl块
 impl Rectangle{
-    fn to_string(&self){
+    fn print_self(&self){
         println!("width:{},height:{}",self.width,self.height);
     }
 }
