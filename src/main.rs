@@ -3,11 +3,11 @@ use rand::Rng;//随机库
 use std::cmp::Ordering;//比较和排序
 
 fn main(){
-    // main_enter();
+    main_enter();
 }
 
-fn main_enter() {
 
+fn main_enter() {
     //Rust还未包含随机数的库，然而，有一个类似的方案，叫做crate，
     //这是一个基于社区的Rust代码包，可能类似于代码编译后的DLL
     //在toml中添加“rand”依赖，为本地rust工程引入相应的包
