@@ -1,6 +1,6 @@
 
 fn ch_06_03_enter() {
-    let config_max : Option<u8> = Option::Some(3u8);
+    let config_max : Option<u8> = Option::Some(3u8);//u前面写多少 值就是多少，不知道这是什么骚语法（
     // match config_max {
     //     //匹配max，max被绑定为Some中的值
     //     Some(max ) => println!("The maximum is configured to be {}", max),
@@ -17,4 +17,3 @@ fn ch_06_03_enter() {
         println!("else!");
     }   
 }
- 
