@@ -1,3 +1,5 @@
+use std::io;
+
 #[derive(Debug)]
 enum UsState{
     Alabama,
@@ -18,7 +20,7 @@ enum Coin{
     Another
 }
 
-fn main(){
+fn ch_06_02_enter(){
     // let coin:Coin = Coin::Quarter(UsState::Alabama);
     // println!("result is {}",value_of_cents(&coin));
 
