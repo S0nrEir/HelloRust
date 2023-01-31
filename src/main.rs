@@ -1,6 +1,9 @@
 use std::io;//基础的io库
-use rand::Rng;//随机库
 use std::cmp::Ordering;//比较和排序
+use rand::Rng;//随机库
+
+//也可以使用这种方式一同包含Ordering和io
+// use std::{cmp::Ordering,io};
 
 fn main(){
     main_enter();
@@ -33,7 +36,7 @@ fn main_enter() {
         io::stdin()
             .read_line(&mut guess)
             .expect("faild to read line!");
-        
+
         //Rust允许用一个新值来隐藏（shadow）变量之前的值，而非创建一个新的
         //通过guess的指定类型（:u32）来告诉parse函数要转换成什么类型
         let guess:u32 = guess.trim().parse().expect("parse faild");
