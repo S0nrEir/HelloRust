@@ -1,6 +1,11 @@
 // use crate::deliver_order;
 use std::fmt::format;
 
+pub fn to_string(){
+    fix_incorrect_order();
+    
+}
+
 fn fix_incorrect_order(){
     println!("fix incorrect order");
     cook_order();

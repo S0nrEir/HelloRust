@@ -1,15 +1,3 @@
+//mod:front_of_house
 pub mod hosting;
-
-mod serving{
-    fn take_order(){
-        println!("take order!");
-    }
-
-    fn serve_order(){
-        println!("serve_order");
-    }
-
-    fn take_payment(){
-        println!("take_payment");
-    }
-}
+pub mod serving;
