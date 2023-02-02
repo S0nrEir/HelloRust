@@ -7,6 +7,7 @@ mod mod_04_understanding_owership;
 mod mod_05_struct_and_example;
 mod mod_06_enum_match_if_let;
 mod mod_07_pachage_and_crates;
+mod mod_08_collections;
 //也可以使用这种方式一同包含Ordering和io
 // use std::{cmp::Ordering,io};
 
@@ -18,5 +19,7 @@ fn main_enter() {
     // mod_02_guessing_game::enter();
     // mod_03_variables_and_mutability::enter();
     // mod_04_understanding_owership::enter();
-    mod_07_pachage_and_crates::enter();
+    //mod_07_pachage_and_crates::enter();
+    // mod_06_enum_match_if_let::enter();
+    mod_08_collections::enter();
 }
