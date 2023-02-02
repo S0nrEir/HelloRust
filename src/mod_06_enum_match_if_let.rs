@@ -38,7 +38,6 @@ fn ch_06_01_enter(){
     let four : IpAddrKindEnum = IpAddrKindEnum::V4(String::from("123.0.0.1"));
     let four_another : IpAddrKindEnum = IpAddrKindEnum::V4_u8( 127 , 0 , 0 , 0 );
     let six : IpAddrKindEnum = IpAddrKindEnum::V6(String::from("::1"));
-
     let write : MessageEnum = MessageEnum::Write(String::from("hello"));
     //调用枚举方法
     write.call();
