@@ -1,7 +1,9 @@
-use std:: cmp::Ordering;
 use std::io;
+use std:: cmp::Ordering;
 
-
+pub fn enter(){
+    ch_06_01_enter();
+}
 /// Rust中使用enum关键字定义一个枚举
 enum IpAddrKindEnum{
     None,

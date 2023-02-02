@@ -1,13 +1,15 @@
 use std::io;
 
 pub fn enter(){
+    println!("------------------------");
     ch_07_01_enter();
     ch_07_02_enter();
     ch_07_03_enter();
 }
 
 fn ch_07_01_enter(){
-    println!("//crate是rust编译时的最小单位，
+    println!("
+    //crate是rust编译时的最小单位，
     //crate可以包含模块，模块可以定义在其他文件
     //crate有两种形式：二进制项和库
     //二进制项目可被编译为.exe，它必须有一个主函数作为入口
