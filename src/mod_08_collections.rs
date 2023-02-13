@@ -149,7 +149,7 @@ fn ch_08_03_enter(){
     //get函数返回一个Option<&V>,如果取不到相应的key，则返回None，copied函数返回一个Option<u32>而非Option<&u32>
     //并且通过调用unwrap_or()来保证取不到对应的key时将返回值设置为0
     let blue_score = scores.get(&String::from("blue")).copied().unwrap_or(0);
-    output_hash_set(&scores);
+    output_hash_map(&scores);
 
     //注意***对于i32这类实现了copy trait的类型，在插入HashMap时，其值将被拷贝***
     //而对于string这类拥有所有权的类型，他的值将被移动到HashMap中，HashMap会成为他们的所有者，看看如下代码编译后会报什么错
@@ -178,7 +178,7 @@ fn ch_08_03_enter(){
     scores.entry(String::from("blue")).or_insert(100);
     scores.entry(String::from("yellow")).or_insert(100);
     scores.entry(String::from("green")).or_insert(500);//只有这行才会起作用因为，前两个都已经存在相应的键值对
-    output_hash_set(&scores);
+    output_hash_map(&scores);
     
     //根据旧值更新一个值
     let text = String::from("hello world wonderful world");
@@ -190,8 +190,8 @@ fn ch_08_03_enter(){
     }
 }
 
-///打印一个HashSet
-fn output_hash_set(hash_set : &HashMap<String,u32>){
+///打印一个HashSet的所有元素
+fn output_hash_map(hash_set : &HashMap<String,u32>){
     //遍历
     //使用一个元组来作为索引项
     for (k,v) in hash_set{
