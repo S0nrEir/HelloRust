@@ -1,4 +1,5 @@
-use std::{file, fs::File, io::{ErrorKind, Write}, result};
+use std::{file, fs::File, io::{ErrorKind, Write, Read,self}};
+use std::io::Error;
 
 pub fn enter(){
     // ch_09_01_enter();
@@ -25,6 +26,9 @@ fn ch_09_01_enter(){
 
 //使用Result<T,E>来处理可恢复错误\
 fn ch_09_02_enter(){
+    read_username_from_file_2();
+    // file_unwrap_expect();
+    return;
     //尝试打开一个不存在的文件，使用Result<T,E>来处理异常
     //File::open返回一个Result<T,E>类型，表示操作结果
     let greeting_file_result = File::open("hello.txt");
@@ -48,6 +52,57 @@ fn ch_09_02_enter(){
         }
     };//end match
     // re_write(&mut greeting_file, String::from("testing").as_bytes());
+}
+
+//使用?来对progapating进行简写，这和read_username_from_file函数起到的作用是一样的
+//Result值之后的?表示：如果结果是ok，这个表达式将返回ok中的值，程序继续执行
+//如果是Err，Err将作为函数的返回值，就像使用了return关键字
+//match和?的区别在于。?的错误值被传递给了from函数，它用于将错误的类型转换为当前函数返回值指定的类型，这是一个标准库的trait
+//注意，?运算符只能被用于返回值与?作用的值像兼容的函数。
+//换句话说，函数返回值为Result<T,E>的函数才能使用?表达式
+//同样?表达式也可用于Option<T>
+fn read_username_from_file_2()->Result<String, io::Error>{
+    //也可以像这样直接使用链式调用
+    // let mut username = String::new();
+    // let mut username_file = File::open("hello.txt")?.read_to_string(&mut username)?;
+    // return Ok(username);
+
+    let mut username_file = File::open("hello.txt")?;
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    return Ok(username);
+}
+
+//错误传播
+//当调用一个可能会失败的函数时，除了在这个函数处理错误外，还可以选择外部调用方知道这个错误并如何处理，将错误的处理方式交给外部调用
+//从文件读用户名，返回一个Result<String,io::Error>类型
+//如果这个函数没玉任何错误成功返回，调用方会收到一个包含String的Ok值
+fn read_username_from_file()->Result<String, io::Error>{
+    let username_file_result = File::open("hello.txt");
+    //打开以后检查结果，如果失败返回Err成员
+    let mut username_file = match username_file_result {
+        Ok(file)=>file,
+        Err(err)=>return Err(err),
+    };
+
+    let mut username = String::new();
+    //把文件内容读到string里，成功写入设置ok成员，失败设置Err成员
+    match username_file.read_to_string(&mut username){
+        Ok(_)=>return Ok(username),
+        Err(err)=>return Err(err),
+    }
+}
+
+fn file_unwrap(){
+    // let mut greeting_file_result = File::open("hello.txt");
+    // //unwrap()函数，如果Result值成员是OK，则返回OK中的值，如果Result成员是Err，则unwrap函数会自动调用panic，比如下面这样
+    // greeting_file_result = File::open("hello.txt").unwrap();
+}
+
+fn file_unwrap_expect(){
+    // let mut greeting_file_result = File::open("hello.txt");
+    // //自定义错误信息
+    // greeting_file_result = File::open("hello.txt").expect("hello.txt should be included in this project");
 }
 
 fn write(file:&mut File,content:&[u8]){
