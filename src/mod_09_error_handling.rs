@@ -76,7 +76,7 @@ fn read_username_from_file_2()->Result<String, io::Error>{
 //错误传播
 //当调用一个可能会失败的函数时，除了在这个函数处理错误外，还可以选择外部调用方知道这个错误并如何处理，将错误的处理方式交给外部调用
 //从文件读用户名，返回一个Result<String,io::Error>类型
-//如果这个函数没玉任何错误成功返回，调用方会收到一个包含String的Ok值
+//如果这个函数没有任何错误成功返回，调用方会收到一个包含String的Ok值
 fn read_username_from_file()->Result<String, io::Error>{
     let username_file_result = File::open("hello.txt");
     //打开以后检查结果，如果失败返回Err成员
