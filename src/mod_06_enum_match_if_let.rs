@@ -1,4 +1,47 @@
 use std::io;
+use std:: cmp::Ordering;
+
+pub fn enter(){
+    ch_06_01_enter();
+    ch_06_02_enter();
+    ch_06_03_enter();
+}
+/// Rust中使用enum关键字定义一个枚举
+enum IpAddrKindEnum{
+    None,
+    V4(String),//Rust中的枚举允许指定类型
+    V6(String),
+    V4_u8(u8,u8,u8,u8),//另一种参数类型的V4枚举
+}
+
+/// 包含四个不同类型成员的枚举
+enum MessageEnum{
+    Quit,
+    Move {x:i32,y:i32},
+    Write(String),
+    ChangeColor(i32,i32,i32),
+}
+
+/// 在Rust中也可以为枚举定义方法
+impl MessageEnum{
+    fn call(&self){
+        //在这里定义方法体
+        println!("MessageEnum.call!");
+    }
+}
+
+fn ch_06_01_enter(){
+    //使用这样的方式声明枚举变量
+    let none : IpAddrKindEnum = IpAddrKindEnum::None;
+    //对指定了具体类型的变量，以这样的方式声明
+    //IpAddrKindEnum::V4是一个获取string参数然后返回一个IpAddrKindEnum类型实例的函数
+    let four : IpAddrKindEnum = IpAddrKindEnum::V4(String::from("123.0.0.1"));
+    let four_another : IpAddrKindEnum = IpAddrKindEnum::V4_u8( 127 , 0 , 0 , 0 );
+    let six : IpAddrKindEnum = IpAddrKindEnum::V6(String::from("::1"));
+    let write : MessageEnum = MessageEnum::Write(String::from("hello"));
+    //调用枚举方法
+    write.call();
+}
 
 #[derive(Debug)]
 enum UsState{
@@ -100,4 +143,23 @@ fn move_player(num_space:&u8){
 }
 fn re_roll(){
     println!("re roll!");
+}
+
+fn ch_06_03_enter() {
+    let config_max : Option<u8> = Option::Some(3u8);//u前面写多少 值就是多少，不知道这是什么骚语法（
+    // match config_max {
+    //     //匹配max，max被绑定为Some中的值
+    //     Some(max ) => println!("The maximum is configured to be {}", max),
+    //     _ => (),
+    // }
+    //下面的代码等价于上面
+    //if let语法通过等号分隔模式和表达式，这里的表达式对应match的第一个分支
+    //模式不匹配时if中的代码将不会执行
+    //这样可以减少模式匹配的代码量，只处理你想要进行模式匹配的代码
+    if let Some(max) = config_max{
+        println!("The maximum is configured to be {}", max);
+    }else{
+        //可以在if let中带一个else，这表示模式匹配中_部分的代码，即所有指定模式不匹配时的默认分支
+        println!("else!");
+    }   
 }

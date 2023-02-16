@@ -1,7 +1,6 @@
 use std::io;
-use std::Range;
 
-fn Ch_03_enter(){
+pub fn enter(){
     let result_of_fib = fibonacci(10);
     println!("res is :{result_of_fib}");
     return;
@@ -30,8 +29,8 @@ fn fibonacci(level:i32)->i32{
     // }
 
     if level <= 2{
-        1
-        // return 1;
+        // 1
+        return 1;
     }
     fibonacci(level - 1) + fibonacci(level - 2)
 }
@@ -58,14 +57,14 @@ fn ch_03_05(){
     let count_lmt:i32 = 100;
     let mut result:i32 = 0;
     //下面两段代码是等价的
-    let result = loop{
-        if counter >= count_lmt{
-            //在Rust中，break和返回值都可以中断循环
-            //使用return可以将loop的结果返回给result
-            return counter;
-        }
-        counter += 1;
-    };
+    // let result = loop{
+    //     if counter >= count_lmt{
+    //         //在Rust中，break和返回值都可以中断循环
+    //         //使用return可以将loop的结果返回给result
+    //         return counter;
+    //     }
+    //     counter += 1;
+    // };
 
     loop{
         if counter >= count_lmt{
@@ -76,7 +75,7 @@ fn ch_03_05(){
     }
 
     //使用break可以中断指定标签的循环
-    counter = 0;
+    // counter = 0;
     //这是一个标签为"counting_up"的循环
     //这段代码
     'counting_up:loop
@@ -152,11 +151,11 @@ fn yet_another_function(val:i32)->i32{
 }
 
 //使用return关键字作为返回值的函数
-fn yet_another_function(val:i32)->bool{
+fn yet_another_function_return_with_bool(val:i32)->bool{
     return false;
 }
 
-fn add_two_number(x:i32,x:i32)->i32{
+fn add_two_number(x:i32, y:i32)->i32{
     return x + y;
 }
 
@@ -171,15 +170,15 @@ fn ch_03_02(){
 
     //复合类型：元组和数组
     //元组长度固定，一旦声明不可改变
-    let tup : (i32,f32,String) = (400,10.0f,"tuple");//声明一个元组
+    let tup : (i32,f32,String) = (400, 10.0 , String::from("tuple"));//声明一个元组
     //为了获取元组中的值，可以使用模式匹配来解构，像这样
-    let (x,y,z) = tup;
-    println!("x = {x},y = {y},z = {z}");
+    // let (x,y,z) = tup;
+    // println!("x = {x},y = {y},z = {z}");
     //也可以直接使用.来访问元组的成员
-    let test : i32 = tup.1;
-    let test = tup.2;
-    let test = tup.3;
-    println!("tup.1={tup.1},tup.2={tup.2},tup.3={tup.3},test={test}");
+    let test : i32 = tup.0;
+    let test : f32 = tup.1;
+    let test : &String = &tup.2;
+    println!("tup.0 = {},tup.1 = {}, tup.2 = {}", tup.0, tup.1, tup.2);
     
     //Rust中，数组长度是固定的
     let arr = [1,2,3,4,5];
@@ -205,7 +204,7 @@ fn ch_03_01(){
         let x = x * 2;
     }
     //这里会导致编译报错，不能改变变量类型(mut)
-    let mut spaces = "     ";
-    spaces = spaces.len();
+    // let mut spaces = "     ";
+    // spaces = spaces.len();
 
 }
