@@ -26,7 +26,7 @@ fn main_enter() {
     // mod_06_enum_match_if_let::enter();
     // mod_07_pachage_and_crates::enter();
     // mod_08_collections::enter();
-    // mod_09_error_handling::enter();
+    mod_09_error_handling::enter();
     // mod_10_01_generics::enter();
-    mod_10_02_trait::enter();
+    // mod_10_02_trait::enter();
 }
