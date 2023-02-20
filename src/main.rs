@@ -11,6 +11,8 @@ mod mod_08_collections;
 mod mod_09_error_handling;
 mod mod_10_01_generics;
 mod mod_10_02_trait;
+mod mod_10_03_lifetime;
+
 //也可以使用这种方式一同包含Ordering和io 
 // use std::{cmp::Ordering,io};
 
@@ -26,7 +28,8 @@ fn main_enter() {
     // mod_06_enum_match_if_let::enter();
     // mod_07_pachage_and_crates::enter();
     // mod_08_collections::enter();
-    mod_09_error_handling::enter();
+    //mod_09_error_handling::enter();
     // mod_10_01_generics::enter();
     // mod_10_02_trait::enter();
+    mod_10_03_lifetime::enter();
 }
