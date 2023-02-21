@@ -62,7 +62,8 @@ fn longest<'a>(x:&'a str,y:&'a str) -> &'a str{
 // }
 
 //这样是可以的写法
-fn longest_<'a>(x:&str,y:&str) -> String{
+//或者返回一个持有生命周期的类型
+fn longest_<'a>(x:&'a str,y:&'a str) -> String{
     let result = String::from("really long string");
     return result;
 }
