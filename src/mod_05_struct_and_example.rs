@@ -1,4 +1,5 @@
 use std::io;
+use std::fmt::Debug;
 
 pub fn enter(){
     ch_05_01_enter();
@@ -88,10 +89,21 @@ fn gen_user(email:String , user_name:String)->User{
 // use std::io;
 
 //为了让结构体能够使用debug模式输出信息，使用derive属性来指定结构体使用Debug这种trait
-#[derive(Debug)]
-struct Rectangle{
+// #[derive(PartialEq,Debug)]
+#[derive(PartialEq)]
+pub struct Rectangle{
     width:u32,
     height:u32,
+}
+
+impl Debug for Rectangle{
+    
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("Rectangle")
+                    .field("width", &self.width)
+                    .field("height", &self.height)
+                    .finish()
+    }
 }
 
 //在Rectangle结构体上定义area方法
@@ -101,13 +113,20 @@ struct Rectangle{
 //所有在impl块中定义的函数都叫做关联函数，因为他们与impl后面的类型相关联
 impl Rectangle{
 
+    pub fn new(width_:u32,height_:u32)->Self{
+        return Rectangle{
+            width:width_,
+            height:height_,
+        };
+    }
+
     //计算自身面积
     fn area(&self)->u32{
         return self.width * self.height;
     }
 
     //计算自身是否能容纳另一个Rectangle
-    fn can_hold(&self,other:&Rectangle)->bool{
+    pub fn can_hold(&self,other:&Rectangle)->bool{
         // return self.area() >= other.area();
         return self.width >= other.width && self.height >= other.height;
     }

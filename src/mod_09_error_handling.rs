@@ -26,9 +26,9 @@ fn ch_09_01_enter(){
 
 //使用Result<T,E>来处理可恢复错误\
 fn ch_09_02_enter(){
-    read_username_from_file_2();
+    // read_username_from_file_2();
+    // return;
     // file_unwrap_expect();
-    return;
     //尝试打开一个不存在的文件，使用Result<T,E>来处理异常
     //File::open返回一个Result<T,E>类型，表示操作结果
     let greeting_file_result = File::open("hello.txt");

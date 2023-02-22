@@ -31,7 +31,6 @@ impl Point<f32>{
 //     Err(E)
 // }
 
-
 pub fn enter(){
 
     // let integer = Point{
@@ -44,25 +43,26 @@ pub fn enter(){
     //   y:4.0,
     // };
 
-    let number_list = vec![34,50,25,100,25];
-    let result = largest(&number_list);
-    println!("largest number is {}",result) ;
+    // let number_list = vec![34,50,25,100,25];
+    // let result = largest(&number_list);
+    // println!("largest number is {}",result) ;
 
-    let char_list = vec!['y','m','a','q'];
-    let result = largest(&char_list);
-    println!("largest char is {}",result);
+    // let char_list = vec!['y','m','a','q'];
+    // let result = largest(&char_list);
+    // println!("largest char is {}",result);
 }
 
 //在Rust中使用泛型
 //只要在函数名后跟T即可
-fn largest<T>(list:&[T]) -> T{
+//这里的代码是有问题的，无法通过编译
+// fn largest<T>(list:&[T]) -> T{
 
-    let mut largest = &list[0];
-    for item in list{
-        if item > largest{
-            largest = item;
-        }
-    }
+//     let mut largest = &list[0];
+//     for item in list{
+//         if item > largest{
+//             largest = item;
+//         }
+//     }
 
-    largest;
-}
+//     largest;
+// }
