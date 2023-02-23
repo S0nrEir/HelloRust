@@ -49,7 +49,15 @@ fn larger_can_hold_smaller(){
     assert!(smaller.can_hold(&larger),"bigger! Can't hold!");
 }
 
+//可以通过cargo test 【函数名】的方式来运行指定的函数测试
+//cargo test 【模块名称】来运行一个模块中的所有测试
+//cargo test 【work】 运行所有函数名中包含work的测试
+//cargo test -- -- ignored 只运行被忽略的测试
+//默认情况Rust会运行所有打了test属性标记的函数测试
+
+//对于想要忽略的测试，在test后添加ignore属性标记即可
 #[test]
+#[ignore]
 fn ignore_fn(){
 
 }
