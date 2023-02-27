@@ -2,6 +2,7 @@ pub use crate::front_of_house::hosting;
 use std::io;
 mod back_of_house;
 mod front_of_house;
+pub mod mod_intergration_test;
 //定义一个模块，以mod关键字开始，后跟模块名
 //这里定义一个名为【前台】的模块
 
@@ -58,7 +59,6 @@ pub fn eat_at_restaurant(){
     let salad:back_of_house::Appetizer = back_of_house::Appetizer::Salad;
     
 }
-
 
 fn deliver_order(){
     println!("deliver order!");
