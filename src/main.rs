@@ -14,8 +14,9 @@ mod mod_10_01_generics;
 mod mod_10_02_trait;
 mod mod_10_03_lifetime;
 mod mod_11_01_testing;
+mod mod_13_01_closure;
+mod mod_13_02_iterators;
 mod mod_tests;
-
 //也可以使用这种方式一同包含Ordering和io 
 // use std::{cmp::Ordering,io};
 
@@ -37,5 +38,7 @@ fn main_enter() {
     // mod_10_01_generics::enter();
     // mod_10_02_trait::enter();
     // mod_10_03_lifetime::enter();
-    mod_11_01_testing::enter();
+    // mod_11_01_testing::enter();
+    // mod_13_01_closure::enter();
+    mod_13_02_iterators::enter();
 }

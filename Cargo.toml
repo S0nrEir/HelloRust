@@ -1,12 +1,21 @@
+#指定name，版本，license等信息
 [package]
-name = "guessing_game"
-version = "0.1.0"
+name = "RustPrograming_Cases"
+version = "0.2.0"
 edition = "2021"
+license="MIT"
+description = "A fun game where you guess what number the computer has chosen."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 rand = "0.8.3"
 
+#opt-level指定了编译时的优化级别，可以用dev和release分别指定开发和发布的优化级别
+
 [profile.release]
 panic='abort'
+opt-level = 3
+
+[profile.dev]
+opt-level = 0

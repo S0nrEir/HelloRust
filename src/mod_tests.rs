@@ -1,7 +1,15 @@
 use crate::mod_05_struct_and_example::Rectangle;
 
-#[cfg(test)]
+//Rust中的测试分为两类，分别是单元测试和集成测试
+//单元测试倾向于更小而更集中，在隔离的环境中一次测试一个模块，或者是测试私有接口。而集成测试对于你的库来说则完全是外部的。
+//它们与其他外部代码一样，通过相同的方式使用你的代码，只测试公有接口而且每个测试都有可能会测试多个模块。
 
+
+//单元测试与要测试的代码一同放在src目录下相同的文件中，
+//在要测试的文件中创建包含测试函数的tests模块，并使用cfg(test)标注模块，就像下面这样
+
+//测试模块的#[cfg(test)]注解告诉Rust只在执行cargo test的时候才编译和运行测试代码
+#[cfg(test)]
 pub fn run(){
     println!("running test...entry");
     it_works();
@@ -43,13 +51,22 @@ fn panic(){
 //这里用mod05的Rectangle结构体做个例子
 #[test]
 fn larger_can_hold_smaller(){
+
     let larger = Rectangle::new(7 ,8);
     let smaller = Rectangle::new(1,5);
-    // assert!(larger.can_hold(&smaller));
-    assert!(smaller.can_hold(&larger),"bigger! Can't hold!");
+    assert!(larger.can_hold(&smaller));
+    // assert!(smaller.can_hold(&larger),"bigger! Can't hold!");
 }
 
+//可以通过cargo test 【函数名】的方式来运行指定的函数测试
+//cargo test 【模块名称】来运行一个模块中的所有测试
+//cargo test 【work】 运行所有函数名中包含work的测试
+//cargo test -- -- ignored 只运行被忽略的测试
+//默认情况Rust会运行所有打了test属性标记的函数测试
+
+//对于想要忽略的测试，在test后添加ignore属性标记即可
 #[test]
+#[ignore]
 fn ignore_fn(){
 
 }
