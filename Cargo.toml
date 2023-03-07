@@ -1,7 +1,10 @@
+#指定name，版本，license等信息
 [package]
-name = "guessing_game"
+name = "RustPrograming_Cases"
 version = "0.2.0"
 edition = "2021"
+license="MIT"
+description = "A fun game where you guess what number the computer has chosen."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
