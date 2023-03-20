@@ -21,6 +21,7 @@ mod mod_tests;
 // use std::{cmp::Ordering,io};
 mod mod_15_01_box;
 mod mod_15_02_deref;
+mod mod_15_03_drop;
 
 fn main(){
     main_enter();
@@ -44,5 +45,6 @@ fn main_enter() {
     // mod_13_01_closure::enter();
     // mod_13_02_iterators::enter();
     // mod_15_01_box::enter();
-    mod_15_02_deref::enter();
+    // mod_15_02_deref::enter();
+    mod_15_03_drop::enter();
 }
