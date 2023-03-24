@@ -22,6 +22,8 @@ mod mod_tests;
 mod mod_15_01_box;
 mod mod_15_02_deref;
 mod mod_15_03_drop;
+mod mod_15_04_reference_count;
+
 
 fn main(){
     main_enter();
@@ -46,5 +48,6 @@ fn main_enter() {
     // mod_13_02_iterators::enter();
     // mod_15_01_box::enter();
     // mod_15_02_deref::enter();
-    mod_15_03_drop::enter();
+    // mod_15_03_drop::enter();
+    mod_15_04_reference_count::enter();
 }

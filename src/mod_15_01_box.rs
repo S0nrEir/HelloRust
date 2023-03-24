@@ -11,10 +11,16 @@ enum List{
     Nil
 }
 
+enum TempEnum{
+    Temp_1(String),
+    Temp_2
+}
+
 pub fn enter(){
     use crate::mod_15_01_box::List::{Cons,Nil};
     // let b = Box::new(5);//在heap上存储一个i32
     // println!("b={}",b);
 
     let list = Cons(0x32, Box::new(Cons(0xfa, Box::new(Cons(0x8f, Box::new(Nil))))));
+
 }
