@@ -23,6 +23,7 @@ mod mod_15_01_box;
 mod mod_15_02_deref;
 mod mod_15_03_drop;
 mod mod_15_04_reference_count;
+mod mod_15_05_ref_cell;
 
 
 fn main(){
@@ -49,5 +50,6 @@ fn main_enter() {
     // mod_15_01_box::enter();
     // mod_15_02_deref::enter();
     // mod_15_03_drop::enter();
-    mod_15_04_reference_count::enter();
+    // mod_15_04_reference_count::enter();
+    mod_15_05_ref_cell::enter();
 }
