@@ -1,5 +1,18 @@
 use std::io;
 use rand::Rng;
+//rust中mod的声明规则：
+//在 crate 根文件中，可以声明新的模块；比如，用 mod garden; 语句声明了一个叫“garden”的模块。
+//编译器将在以下位置查找模块的代码：
+//内联（Inline），用大括号替换 mod garden; 语句的分号：mod garden {}
+//在 src/garden.rs 文件中；
+//在 src/garden/mod.rs 文件中。（这样的问题是：当模块多了以后，mod.rs文件太多了）
+
+//告诉编译器在src/front_of_house.rs中发现并引入模块代码
+mod front_of_house;
+// pub mod front_of_house;
+
+//hosting模块的路径：crate.front_of_hose.hosting，这样声明后，可以直接使用hosting::xxx();
+use crate::front_of_house::hosting;
 
 mod custom_trait;
 mod mod_02_guessing_game;//ch2
@@ -28,6 +41,7 @@ mod mod_15_06_reference_cycles;
 
 fn main(){
     main_enter();
+    hosting::add_to_waitlist();
 }
 
 fn main_enter() {

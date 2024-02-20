@@ -16,6 +16,7 @@ impl<T> Point<T>{
 //为泛型为f32的Point实例定义方法，其他泛型不是f32的Point<T>实例则没有定义此方法
 impl Point<f32>{
     fn distance_from_origin(&self) -> f32{
+        let test = &self.x;
         return (self.x.powi(2) + self.y.powi(2)).sqrt();
     }
 }
@@ -54,15 +55,28 @@ pub fn enter(){
 
 //在Rust中使用泛型
 //只要在函数名后跟T即可
-//这里的代码是有问题的，无法通过编译
-// fn largest<T>(list:&[T]) -> T{
-
+//这里的代码是有问题的，无法通过编译，因为不知道T的类型是否可以进行比较
+// fn largest<T>(list: &[T]) -> &T {
 //     let mut largest = &list[0];
-//     for item in list{
-//         if item > largest{
+
+//     for item in list {
+//         if item > largest {
 //             largest = item;
 //         }
 //     }
 
-//     largest;
+//     return largest
 // }
+
+//所以要把T的类型限定为实现了std::cmp::PartialOrd这个trait的
+fn largest<T:std::cmp::PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    return largest
+}

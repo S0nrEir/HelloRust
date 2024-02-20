@@ -10,6 +10,7 @@ pub fn enter(){
     //新线程可能在主线程剩余部分执行完前执行完，或者也可能主线程先执行完。
     //如果主线程维护了 list 的所有权但却在新线程之前结束并且丢弃了 list，则在线程中的不可变引用将失效。
     //因此，编译器要求 list 被移动到在新线程中运行的闭包中，这样引用就是有效的
+    //如果希望强制闭包获取它用到的环境中值的所有权，可以在参数列表前使用 move 关键字，就像下面这样
     let list = vec![1,2,3];
     println!("before defining closure:{:?}",list);
     thread::spawn(move || {println!("from thread:{:?}",list);})

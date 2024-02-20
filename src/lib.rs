@@ -3,6 +3,8 @@ use std::io;
 mod back_of_house;
 mod front_of_house;
 pub mod mod_intergration_test;
+use back_of_house::Appetizer;
+
 //定义一个模块，以mod关键字开始，后跟模块名
 //这里定义一个名为【前台】的模块
 
@@ -55,8 +57,8 @@ pub fn eat_at_restaurant(){
     println!("i'd like {} toast please",meal.toast);
 
     //使用枚举
-    let soup:back_of_house::Appetizer = back_of_house::Appetizer::Soup;
-    let salad:back_of_house::Appetizer = back_of_house::Appetizer::Salad;
+    let soup:Appetizer = Appetizer::Soup;
+    let salad:Appetizer = Appetizer::Salad;
     
 }
 

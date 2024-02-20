@@ -4,29 +4,36 @@ use std::{fmt::{format, Display,Debug}, string, clone};
 //定义一个Summary trait来请求摘要
 //所有实现该trait的类型都要实现具体接口
 //trait中可以有多个接口
-pub trait Summary {
+pub trait Summary 
+{
     fn summarize(&self)->String;
-
+    
     //可以为trait实现默认方法，这样每个具体类型就不用对该trait各做一次具体实现
-    fn summarize_default(&self)->String{
+    fn summarize_default(&self)->String
+    {
         return String::from("(Read more...)");
     }
 
     //将一个SummaryTrait作为参数传入
-    fn notify(item:&impl Summary){
+    fn notify(item:&impl Summary)
+    {
         println!("breaking news!,{}",item.summarize());
     }
     
     //将trait作为参数传入实际上是一种语法糖，大概形式类似于下面这样
-    fn notify__<T:Summary>(item:&T){
+    fn notify__<T:Summary>(item:&T)
+    {
         //...
     }
 
     //+连接两个类型表示：函数要求泛型参数必须同时实现了Summary和Display两种trait
-    fn notify_<T:Summary+Display>(item:&T){
+    fn notify_<T:Summary+Display>(item:&T)
+    {
         //...
     }
-    fn _notify_(item:&(impl Summary+Display)){
+
+    fn _notify_(item:&(impl Summary+Display))
+    {
         //...
     }
 
@@ -36,7 +43,7 @@ pub trait Summary {
         T:Display+Clone,
         U:Clone+Debug,
     {
-        1
+        0
     }
 }
 
@@ -49,10 +56,12 @@ pub struct NewsArticle{
 
 //实现接口
 //impl 【trait名】 for 类型名
-impl Summary for NewsArticle{
-    fn summarize(&self)->String {
+impl Summary for NewsArticle
+{
+    fn summarize(&self)->String 
+    {
         return format!( "{},by {} {}",self.headline,self.author,self.location);
-        }
+    }
 }
 
 impl NewsArticle{
@@ -116,7 +125,7 @@ pub fn enter(){
 
     //其他依赖本crate的crate也可以将Summary引入作用域以实现相应的Summarize函数
     //但这里有一个限制，就是当要实现trait的类型位于crate的本地作用域时，才能为其实现trait
-    //比如可以为Tweet实现标准库中的DisplayTrait,也可以在该模块的作用域中为Vec<T>实现SummaryTrait，这是因为SummaryTrait位于本地作用域
+    //比如可以为Tweet实现标准库中的Display Trait,也可以在该模块的作用域中为Vec<T>实现SummaryTrait，这是因为SummaryTrait位于本地作用域
     //但不能为外部类型实现外部Trait，比如为Vec<T>实现DisplayTrait
     //这确保了别人编写的代码不会破坏你的代码，反之亦然
     let tweet = Tweet::new(String::from("hose_ebooks"),

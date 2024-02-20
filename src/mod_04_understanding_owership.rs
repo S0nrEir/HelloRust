@@ -43,14 +43,17 @@ fn first_word(s:&String)->usize{
     //在bytes上使用iter创建一个迭代器，iter返回集合中的每一个元素，enumerate函数将元素作为元组返回
 
     for (i,&temp_char) in bytes.iter().enumerate(){
-        if temp_char == b' '{//字节的字面值语法
+        if temp_char == b' '{//字节的字面值语法，如果temp_char为空格
             return i;
         }
     }
-    return s.len();
+    return s.len(); 
 }
 
 fn ch_04_enter(){
+    //变量的所有权总是遵循相同的模式：将值赋给另一个变量时移动它。当持有堆中数据值的变量离开作用域时，
+    //其值将通过 drop 被清理掉，除非数据被移动为另一个变量所有。
+
     //因为Rust的特性，所以像下边这样在do_something函数后，想要再次使用变量s1将会导致一个编译器错误
     //这是因为s1的值移动到函数内部后，在离开函数时，将会被释放，因此在调用do_something函数后使用s1变量在Rust中是不被允许的
     // let s1 = String::from("hello");
@@ -58,8 +61,9 @@ fn ch_04_enter(){
 
     
     //为了解决这个问题，可以使用引用，像下面这样
-    //从Rust的角度来讲，从Rust的角度来讲，这并不会转移s1的所有权到函数内部，但却可以访问s1所持有的内存地址和其数据
+    //从Rust的角度来讲，这并不会转移s1的所有权到函数内部，但却可以访问s1所持有的内存地址和其数据
     //注意一个引用的作用域从声明的地方开始一直持续到最后一次使用为止
+    //当变量离开作用域时，rust将自动调用一个叫做drop的特殊函数释放该变量持有的内存
     let mut s1 = String::from("reference");
     do_something_ref(&mut s1);
     println!("s1 is {s1}");
