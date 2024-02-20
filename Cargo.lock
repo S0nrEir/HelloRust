@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "RustPrograming_Cases"
+name = "RustBook_Instances_CN"
 version = "0.2.0"
 dependencies = [
  "rand",

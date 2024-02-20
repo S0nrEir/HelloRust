@@ -1,10 +1,10 @@
 #指定name，版本，license等信息
 [package]
-name = "RustPrograming_Cases"
+name = "RustBook_Instances_CN"
 version = "0.2.0"
 edition = "2021"
 license="MIT"
-description = "a project that contains instances of RustBook with Chinese"
+description = "一个包含了RustBook程序实例的学习项目，a project that contains instances of RustBook with Chinese,for studing."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
