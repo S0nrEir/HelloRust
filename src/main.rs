@@ -41,7 +41,7 @@ mod mod_15_06_reference_cycles;
 
 fn main(){
     main_enter();
-    hosting::add_to_waitlist();
+//    hosting::add_to_waitlist();
 }
 
 fn main_enter() {
