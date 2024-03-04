@@ -1,8 +1,21 @@
-use std::rc::Rc;
+use std::{rc::Rc};
+use std::fmt::Display;
 
 enum List{
     Cons(i32,Rc<List>),
     Nil,
+}
+
+impl Display for List
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result
+    {
+        match *self 
+        {
+            List::Nil => { return f.write_str("Nil");},
+            _ => {return f.write_str("Cons");},
+        }
+    }
 }
 
 //引用计数用于当希望堆上的数据被应用的多个部分读取，且无法在编译期确定程序的哪一部分会最后结束使用它是的时候
@@ -39,6 +52,7 @@ fn ref_count_print(){
     //对于一个引用的计数，可以通过Rc::Strong_count函数获取
     let a = Rc::new(List::Cons((5), (Rc::new(List::Cons((10), (Rc::new(List::Nil)))))));
     println!("count after creating a = {}",Rc::strong_count(&a));
+    println!("value of a is {}",a);
     let b = List::Cons(3, Rc::clone(&a));
     println!("count after creating b = {}",Rc::strong_count(&a));
     {
