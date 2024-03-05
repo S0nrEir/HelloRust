@@ -12,7 +12,7 @@ mod front_of_house;
 // pub mod front_of_house;
 
 //hosting模块的路径：crate.front_of_hose.hosting，这样声明后，可以直接使用hosting::xxx();
-use crate::front_of_house::hosting;
+// use crate::front_of_house::hosting;
 
 mod custom_trait;
 mod mod_02_guessing_game;//ch2
@@ -41,7 +41,7 @@ mod mod_15_06_reference_cycles;
 
 fn main(){
     main_enter();
-//    hosting::add_to_waitlist();
+    // front_of_house::hosting::add_to_waitlist();
 }
 
 fn main_enter() {
@@ -65,6 +65,6 @@ fn main_enter() {
     // mod_15_02_deref::enter();
     // mod_15_03_drop::enter();
     // mod_15_04_reference_count::enter();
-    // mod_15_05_ref_cell::enter();
-    mod_15_06_reference_cycles::enter();
+    mod_15_05_ref_cell::enter();
+    // mod_15_06_reference_cycles::enter();
 }

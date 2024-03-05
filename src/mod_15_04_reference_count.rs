@@ -22,7 +22,6 @@ impl Display for List
 //如果确切地知道哪部分是最后一个使用结束的话，就可以令其成为数据的所有者，以应用所有权规则。
 //但要注意，Rc<T>只能用于单线程场景，多线程的引用计数会有别的处理方法
 pub fn enter(){
-
     // 编译错误，因为a的所有权已经移动给b
     // let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
     // let b = Cons(3, Box::new(a));
