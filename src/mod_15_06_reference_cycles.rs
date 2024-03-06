@@ -28,8 +28,35 @@ impl List{
 }
 
 pub fn enter(){
-    _fn();
+    // _fn();
     //  fn_();
+    _fn_();
+}
+
+fn _fn_(){
+    let leaf = Rc::new(Node{
+        value:3,
+        parent:RefCell::new(Weak::new()),
+        children:RefCell::new(vec![]),
+    });
+    println!("1.leaf strong_count = {},weak count = {}",Rc::strong_count(&leaf),Rc::weak_count(&leaf));
+
+    {
+        let branch = Rc::new(Node{
+            value:5,
+            parent:RefCell::new(Weak::new()),
+            children:RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+        //leaf.parent持有一个branch的弱引用
+        println!("------in scope------");
+        println!("2.branch strong_count = {},weak count = {}",Rc::strong_count(&branch),Rc::weak_count(&branch));
+        println!("3.leaf strong_count = {},leaf weak_count = {}",Rc::strong_count(&leaf),Rc::weak_count(&leaf));
+        println!("------out scope------");
+    }//离开作用域，branch离开作用域，强引用-1，被回收，弱引用虽然仍为1，但与是否被丢弃无关，所以没有内存泄漏
+    println!("leaf parent = {:?}",leaf.parent.borrow().upgrade());
+    println!("leaf strong_count = {},weak_count = {}",Rc::strong_count(&leaf),Rc::weak_count(&leaf));
+
 }
 
 fn fn_(){
