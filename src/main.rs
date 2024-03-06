@@ -38,6 +38,7 @@ mod mod_15_03_drop;
 mod mod_15_04_reference_count;
 mod mod_15_05_ref_cell;
 mod mod_15_06_reference_cycles;
+mod mod_16_01_threads;
 
 fn main(){
     main_enter();
@@ -66,5 +67,6 @@ fn main_enter() {
     // mod_15_03_drop::enter();
     // mod_15_04_reference_count::enter();
     // mod_15_05_ref_cell::enter();
-    mod_15_06_reference_cycles::enter();
+    //mod_15_06_reference_cycles::enter();
+    mod_16_01_threads::enter();
 }
