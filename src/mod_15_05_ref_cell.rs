@@ -106,8 +106,8 @@ mod tests{
         fn send(&self, message: &str) 
         {
             println!("MockMessenger.send!");
-            self.test_mut_borrow_mut();
-            return;
+            // self.test_mut_borrow_mut();
+            // return;
             //此处报错，借用检查器不允许这样做
             //因为send函数获取了self的不可变引用，也不能使用&mut self代替，因为这不符合Messenger trait的签名
             //因为_sent_messages要改变自身的值（push函数），
@@ -133,8 +133,8 @@ mod tests{
 //当创建不可变和可变引用时，分别使用 & 和 &mut 语法。
 //对于 RefCell<T> 来说，则是 borrow 和 borrow_mut 方法
 //这属于 RefCell<T> 安全 API 的一部分。
-//borrow 方法返回 Ref<T> 类型的智能指针，
-//borrow_mut 方法返回 RefMut<T> 类型的智能指针。
+//borrow 方法返回 Ref<T> 类型的智能指针，borrow()获取的是不可变借用
+//borrow_mut 方法返回 RefMut<T> 类型的智能指针。borrow_mut返回的是可变借用
 //这两个类型都实现了 Deref，所以可以当作常规引用对待。
 
 //Rc<T>和RefCell<T>可以结合使用，这样就可以得到拥有多个所有者并且可变的值了

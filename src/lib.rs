@@ -5,8 +5,8 @@ mod front_of_house;
 pub mod mod_intergration_test;
 use back_of_house::Appetizer;
 
-//定义一个模块，以mod关键字开始，后跟模块名
-//这里定义一个名为【前台】的模块
+//声明一个模块，以mod关键字开始，后跟模块名
+//这里声明一个名为【前台】的模块
 
 //main.rs和lib.rs是crate的根，
 //这是因为这两个文件的内容分别在crate模块结构的根组成了一个名为crate的模块，这被称为模块树
