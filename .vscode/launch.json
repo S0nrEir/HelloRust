@@ -1,7 +1,4 @@
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -38,6 +35,21 @@
                     "kind": "bin"
                 }
             },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Python: File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "justMyCode": true
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug_rust",
+            "program": "${workspaceFolder}/target/debug/RustBook_Instances_CN.exe", //改成可执行文件实际名称！
             "args": [],
             "cwd": "${workspaceFolder}"
         }
