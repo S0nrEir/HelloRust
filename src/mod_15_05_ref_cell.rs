@@ -1,6 +1,4 @@
 //内部可变性是rust的一项特性，这允许在拥有不可变引用时也能改变数据，通常这是借用规则不允许的
-
-
 pub trait Messenger {
     fn send(&self, msg:&str);
 }

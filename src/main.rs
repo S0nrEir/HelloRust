@@ -40,6 +40,8 @@ mod mod_15_05_ref_cell;
 mod mod_15_06_reference_cycles;
 mod mod_16_01_threads;
 mod mod_16_02_message_passing;
+mod mod_16_03_shared_state;
+
 
 fn main(){
     main_enter();
@@ -70,5 +72,6 @@ fn main_enter() {
     // mod_15_05_ref_cell::enter();
     //mod_15_06_reference_cycles::enter();
     //mod_16_01_threads::enter();
-    mod_16_02_message_passing::enter();
+    // mod_16_02_message_passing::enter();
+    mod_16_03_shared_state::enter();
 }
