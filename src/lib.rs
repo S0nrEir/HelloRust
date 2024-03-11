@@ -1,5 +1,5 @@
 pub use crate::front_of_house::hosting;
-use std::{io, option};
+use std::{io, option, os::windows};
 mod back_of_house;
 mod front_of_house;
 pub mod mod_intergration_test;
@@ -66,7 +66,7 @@ fn deliver_order(){
     println!("deliver order!");
 }
 
-//十七章oop相关：
+//ch17.1：
 pub struct AverageCollection{
     _list:Vec<i32>,
     _average:f64,
@@ -126,5 +126,137 @@ impl AverageCollection{
         //     }
         // }
         // self._average = total as f64 / len as f64;
+    }
+}
+
+//ch17.2
+///GUI控件绘制trait
+pub trait Draw{
+    ///绘制接口
+    fn draw(& self);
+}
+
+///屏幕类型实例
+pub struct Screen{
+    ///Draw组件集合
+    pub components : Vec<Box<dyn Draw>>,
+    //impl Trait 和 dyn Trait 在 Rust 分别被称为静态分发和动态分发.
+    //即当代码涉及多态时, 需要某种机制决定实际调用类型.
+    //Rust 的 Trait 可以看作某些具有通过特性类型的集合,
+    //在编译或运行时必须确定 Button 还是 TextView. 静态分发, 
+    //正如静态类型语言的"静态"一词说明的, 在编译期就确定了具体调用类型. 
+    //Rust 编译器会通过单态化(Monomorphization) 将泛型函数展开.
+
+    //impl trait 和 dyn trait 区别在于静态分发于动态分发, 
+    //静态分发性能好, 但大量使用有可能造成二进制文件膨胀;
+    //动态分发以 trait object 的概念通过虚表实现, 会带来一些运行时开销.
+    //又因 trait object 与 Trait 在不引入 dyn 的情况下经常导致语义混淆,
+    //所以 Rust 特地引入 dyn 关键字, 在 Rust 2018 中已经稳定.
+
+    //回忆一下第十章 “泛型代码的性能” 部分讨论过的，
+    //当对泛型使用 trait bound 时编译器所执行的单态化处理：
+    //编译器为每一个被泛型类型参数代替的具体类型生成了函数和方法的非泛型实现。
+    //单态化产生的代码在执行静态分发（static dispatch）。
+    //静态分发发生于编译器在编译时就知晓调用了什么方法的时候
+    //这与 动态分发 （dynamic dispatch）相对，这时编译器在编译时无法知晓调用了什么方法。
+    //在动态分发的场景下，编译器会生成负责在运行时确定该调用什么方法的代码。
+    //当使用 trait 对象时，Rust 必须使用动态分发。
+    //编译器无法知晓所有可能用于 trait 对象代码的类型，
+    //所以它也不知道应该调用哪个类型的哪个方法实现。
+    //为此，Rust 在运行时使用 trait 对象中的指针来知晓需要调用哪个方法。
+    //动态分发也阻止编译器有选择的内联方法代码，这会相应的禁用一些优化。
+    //尽管在编写示例 17-5 和可以支持示例 17-9 中的代码的过程中确实获得了额外的灵活性，但仍然需要权衡取舍。
+}
+
+impl Screen{
+    ///模拟屏幕绘制
+    pub fn run(&self){
+        // for i in 0..self.components.len(){
+        //     self.components[i].draw();
+        // }
+        for component in self.components.iter(){
+            component.draw();
+        }
+    }
+
+    ///创建一个button
+    pub fn create_button(width:u32,height:u32,label:String)->Button{
+        return Button{
+            _width:width,
+            _height:height,
+            _label:label,
+        }
+    }
+
+    ///创建一个selec box
+    pub fn create_select_box(width:u32,height:u32,options:Vec<String>)->SelectBox{
+        return SelectBox {
+             _width: width, 
+             _height: height, 
+             _options: options 
+        }
+    }
+}
+
+///屏幕类型实例
+// pub struct Screen<T:Draw>{
+//     ///Draw组件集合
+//     pub components : Vec<T>,
+// }
+
+// impl<T> Screen<T> where T:Draw{
+//     ///模拟屏幕绘制
+//     pub fn run(&self){
+//         // for i in 0..self.components.len(){
+//         //     self.components[i].draw();
+//         // }
+//         for component in self.components.iter(){
+//             component.draw();
+//         }
+//     }
+
+//     ///创建一个button
+//     pub fn create_button(width:u32,height:u32,label:String)->Button{
+//         return Button{
+//             _width:width,
+//             _height:height,
+//             _label:label,
+//         }
+//     }
+
+//     ///创建一个selec box
+//     pub fn create_select_box(width:u32,height:u32,options:Vec<String>)->SelectBox{
+//         return SelectBox {
+//              _width: width, 
+//              _height: height, 
+//              _options: options 
+//         }
+//     }
+// }
+
+
+pub struct Button{
+    pub _width:u32,
+    pub _height:u32,
+    pub _label:String,
+}
+
+impl Draw for Button{
+    fn draw(& self) {
+        println!("button draw...");
+    }
+}
+
+//另一个使用gui的crate中在SelectBox上实现Draw trait
+// use gui.Draw;
+pub struct SelectBox {
+    _width: u32,
+    _height: u32,
+    _options: Vec<String>,
+}
+
+impl Draw for SelectBox {
+    fn draw(&self) {
+        println!("selec box drawing...");
     }
 }

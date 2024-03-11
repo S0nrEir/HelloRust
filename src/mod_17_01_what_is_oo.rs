@@ -3,5 +3,5 @@ pub fn enter(){
 }
 
 fn _fn(){
-
+    println!("see lib.rs");
 }

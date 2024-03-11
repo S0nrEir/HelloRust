@@ -41,7 +41,8 @@ mod mod_15_06_reference_cycles;
 mod mod_16_01_threads;
 mod mod_16_02_message_passing;
 mod mod_16_03_shared_state;
-mod mod_17_01_what_is_oo;;
+mod mod_17_01_what_is_oo;
+mod mod_17_02_trait_objects;
 
 
 fn main(){
@@ -75,5 +76,6 @@ fn main_enter() {
     //mod_16_01_threads::enter();
     // mod_16_02_message_passing::enter();
     // mod_16_03_shared_state::enter();
-    mod_17_01_what_is_oo::enter();
+    // mod_17_01_what_is_oo::enter();
+    mod_17_02_trait_objects::enter();
 }
