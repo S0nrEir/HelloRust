@@ -1,5 +1,5 @@
 pub use crate::front_of_house::hosting;
-use std::io;
+use std::{io, option};
 mod back_of_house;
 mod front_of_house;
 pub mod mod_intergration_test;
@@ -64,4 +64,67 @@ pub fn eat_at_restaurant(){
 
 fn deliver_order(){
     println!("deliver order!");
+}
+
+//十七章oop相关：
+pub struct AverageCollection{
+    _list:Vec<i32>,
+    _average:f64,
+}
+
+impl AverageCollection{
+    ///添加值
+    pub fn add(&mut self,value:i32)->bool{
+        self._list.push(value);
+        self.update_average();
+        return true;
+    }
+
+    ///获取平均值
+    pub fn get_average(&self)->f64{
+        return self._average;
+    }
+
+    ///移除队尾最后一个
+    pub fn pop_remove(&mut self)->Option<i32>{
+        let result = self._list.pop();
+        match result {
+            Some(value) => {
+                self.update_average();
+                return Some(value);
+            }
+            _ => return None,
+        }
+    }
+
+    ///移除指定位置
+    pub fn remove_at(&mut self,index:usize)->bool{
+        if index >= self._list.len() {
+            return false;
+        }
+        
+        self._list.remove(index);
+        return true;
+    }
+
+    pub fn new()->AverageCollection{
+        return AverageCollection { 
+            _list:vec![],
+            _average:0.0,
+        }
+    }
+
+    ///更新
+    fn update_average(&mut self){
+        let total:i32 = self._list.iter().sum();
+        self._average = total as f64 / self._list.len() as f64;
+        // let len = self._list.len();
+        // let mut total : i32 = 0;
+        // for i in 0..len{
+        //     if let Some(number) = self._list.get(i){
+        //         total += number;
+        //     }
+        // }
+        // self._average = total as f64 / len as f64;
+    }
 }
