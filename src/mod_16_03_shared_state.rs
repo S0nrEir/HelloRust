@@ -1,5 +1,5 @@
 use core::num;
-use std::borrow::BorrowMut;
+use std::borrow::{BorrowMut, Borrow};
 use std::rc::Rc;
 use std::{sync::Mutex};
 use std::thread::{self, JoinHandle};
@@ -97,15 +97,18 @@ fn _fn__(){
     let mut handlers:Vec<JoinHandle<()>> = vec![];
 
     for _ in 0..10{
-        //counter在声明时是不可变的，但可以获取其内部值得可变引用
+        //counter在声明时是不可变的，但可以获取其内部值的可变引用
         //这是因为Mutex<T>提供了内部可变性，就像RefCel
         //也可以使用Mutex<T>改变Arc<T>的内容
 
-        //使用clone获取其包含的Mutex类型的引用
-        let counter: Arc<Mutex<i32>> = Arc::clone(&counter);
+        let data: Arc<Mutex<i32>> = Arc::clone(&counter);
         let handler = thread::spawn(move ||{
-            let mut num = counter.lock().unwrap();
-            *num += 1;
+            if let Ok(mut number) = data.lock(){
+                *number += 1;
+            }
+
+            // let mut num = counter.lock().unwrap();
+            // *num += 1;
         });//end of thrad
 
         handlers.push(handler);
