@@ -44,7 +44,7 @@ mod mod_16_03_shared_state;
 mod mod_17_01_what_is_oo;
 mod mod_17_02_trait_objects;
 mod mod_17_03_oo_design_patterns;
-
+mod mod_18_01_all_the_places_for_patterns;
 
 fn main(){
     main_enter();
@@ -53,7 +53,6 @@ fn main(){
 
 fn main_enter() {
     println!("--------------------------------------------------------------------------");
-
     // mod_02_guessing_game::enter();
     // mod_03_variables_and_mutability::enter();
     // mod_04_understanding_owership::enter();
@@ -61,7 +60,7 @@ fn main_enter() {
     // mod_06_enum_match_if_let::enter();
     // mod_07_pachage_and_crates::enter();
     // mod_08_collections::enter();
-    //mod_09_error_handling::enter();
+    // mod_09_error_handling::enter();
     // mod_10_01_generics::enter();
     // mod_10_02_trait::enter();
     // mod_10_03_lifetime::enter();
@@ -73,11 +72,12 @@ fn main_enter() {
     // mod_15_03_drop::enter();
     // mod_15_04_reference_count::enter();
     // mod_15_05_ref_cell::enter();
-    //mod_15_06_reference_cycles::enter();
-    //mod_16_01_threads::enter();
+    // mod_15_06_reference_cycles::enter();
+    // mod_16_01_threads::enter();
     // mod_16_02_message_passing::enter();
     // mod_16_03_shared_state::enter();
     // mod_17_01_what_is_oo::enter();
     // mod_17_02_trait_objects::enter();
-    mod_17_03_oo_design_patterns::enter();
+    // mod_17_03_oo_design_patterns::enter();
+    mod_18_01_all_the_places_for_patterns::enter();
 }
