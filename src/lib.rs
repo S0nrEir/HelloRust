@@ -1,5 +1,6 @@
 pub use crate::front_of_house::hosting;
-use std::{io, option, os::windows};
+//use core::num::flt2dec::strategy::dragon;
+use std::{io, option, os::windows, future::Pending};
 mod back_of_house;
 mod front_of_house;
 pub mod mod_intergration_test;
@@ -259,4 +260,183 @@ impl Draw for SelectBox {
     fn draw(&self) {
         println!("selec box drawing...");
     }
+}
+
+//ch17.3:
+///State定义了所有状态对象的共有行为
+trait State {
+    //不同于self,&self或者&mut self作为函数第一个参数
+    //这个语法意思是：这个函数只可在持有这个类型的Box上调用（如果类型实例被Box包裹，才可以调用该函数？？？）
+    //这个语法获取了Box<Self>的所有权使老的状态无效化
+    //以便Post的状态值可以转换为一个新的状态
+    ///请求审核
+    fn request_review(self:Box<Self>) -> Box<dyn State>;
+
+    //批准发布
+    fn approve(self:Box<Self>) -> Box<dyn State>;
+
+    ///根据状态获取博文内容
+    // fn content(&self,post:&Post)->&str{
+    //     return "";
+    // }
+    fn content<'x>(&self, post:&'x Post) -> &'x str {
+        return "";
+    }
+}
+
+///draft草稿状态对象
+struct Draft{
+}
+impl State for Draft{
+    //当状态为draft，请求审核时，返回一个PendingReview实例，表示待定审核
+    fn request_review(self:Box<Self>) -> Box<dyn State> {
+        return Box::new(PendingReview{});
+    }
+
+    //当自身为草稿状态时，不允许发布
+    ///批准发布
+    fn approve(self:Box<Self>) -> Box<dyn State> {
+        return self;
+    }
+}
+
+///PendingReview待定审核状态
+struct PendingReview{
+}
+impl State for PendingReview{
+    //当状态为PendingReview还要请求审核时，只返回自身就行了
+    fn request_review(self:Box<Self>) -> Box<dyn State> {
+        return self;
+    }
+
+    //批准发布，变更为已发布状态，返回一个已发布状态对象
+    ///批准发布
+    fn approve(self:Box<Self>) -> Box<dyn State> {
+        return Box::new(Published{});
+    }
+}
+
+///已发布状态对象
+struct Published{
+}
+impl State for Published{
+    fn request_review(self:Box<Self>) -> Box<dyn State> {
+        return self;
+    }
+    fn approve(self:Box<Self>) -> Box<dyn State> {
+        return self;
+    }
+    //这里有个问题，content返回的是引用，但编译器无法确定self和post的引用生命周期是否一致，
+    //所以需要手动声明，让编译器直到post和返回引用的生命周期是一致的
+    fn content<'x>(&self, post:&'x Post) -> &'x str {
+        return &post._content;
+    }
+    // fn content<'a>(&self, post: &'a Post) -> &'a str {
+    //     return &post._content;
+    // }
+}
+
+pub struct DraftPost{
+    _content:String
+}
+
+impl DraftPost{
+    pub fn add_text(&mut self,text:&str){
+        self._content.push_str(text);
+    }
+
+    //request_review函数获取self的所有权
+    //因此会消费DraftPost的实例
+    //并返回一个PendingReviewPost实例
+    //PendingReviewPost类型同理
+    pub fn request_review(self)->PendingReviewPost{
+        return PendingReviewPost{
+            _content:self._content,
+        }
+    }
+}
+
+pub struct PendingReviewPost{
+    _content:String
+}
+
+impl PendingReviewPost {
+    pub fn approve(self)->NewPost{
+        return NewPost{
+            _content:self._content,
+        }
+    }
+}
+
+pub struct NewPost{
+    _content:String,
+}
+
+impl NewPost {
+    pub fn new()->DraftPost{
+        return DraftPost{
+            _content : String::new(),
+        };
+    }
+
+    ///向文章追加文本
+    pub fn add_text(&mut self,text:&str){
+        self._content.push_str(text);
+    }
+
+    ///获取文章内容
+    pub fn content(&self) -> &str{
+        return &self._content;
+    }
+
+}
+
+///Post
+pub struct Post{
+    _state:Option<Box<dyn State>>,
+    _content:String,
+}
+
+
+impl Post {
+    ///返回一个post实例
+    pub fn new()->Post{
+        return Post{
+            _state:Some(Box::new(Draft{})),
+            _content:String::new(),
+        };
+    }
+
+    ///向文章追加文本
+    pub fn add_text(&mut self,text:&str){
+        self._content.push_str(text);
+    }
+
+    ///获取文章内容
+    pub fn content(&self) -> &str{
+        // return &self._content;
+
+        return "";
+        //as_ref返回option中值得引用而不是返回其所有权
+        //return self._state.as_ref().unwrap().content(self);
+    }
+
+    ///请求审核
+    pub fn request_review(&mut self){
+        //take将取出option中的some值，并留下一个none，这将让调用方获得该值的所有权
+        //因为rust中不允许结构体实例存在值为空的字段
+        //所以要将state的值移出post而非借用它
+        if let Some(old_state) = self._state.take(){
+            //如果s为draft，则返回pendingReview以更新状态
+            self._state = Some(old_state.request_review());
+        }
+    }
+
+    ///批准发布
+    pub fn approve(&mut self){
+        if let Some(old_state) = self._state.take(){
+            self._state = Some(old_state.approve());
+        }
+    }
+
 }
