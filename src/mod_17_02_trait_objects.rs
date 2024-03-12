@@ -1,5 +1,5 @@
 //使用lib时，命名空间路径以项目开头
-use rustbook_instances_cn::Screen;
+use RustBook_Instances_CN::Screen;
 
 pub fn enter(){
     _fn();
