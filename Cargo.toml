@@ -1,6 +1,6 @@
 #指定name，版本，license等信息
 [package]
-name = "RustBook_Instances_CN"
+name = "rustbook_instances_cn"
 version = "0.6.0"
 edition = "2021"
 license="MIT"
