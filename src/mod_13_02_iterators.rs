@@ -2,7 +2,6 @@ use std::result;
 
 pub fn enter(){
 
-
     let temp = TempStruct::new(vec![0x100,0xff,0xfff,0xffff,0xfffff]);
     for iter in temp.iter() {
         println!("elem:{}",iter);
@@ -71,6 +70,7 @@ impl TempStructIter{
 
 impl Iterator for TempStructIter{
     //指定返回值类型
+    //type Item和Self::Item定义了trait的关联类型
     type Item = i32;
 
     //调用next函数的方法被称为消费适配器，因为调用他们会“消耗”迭代器
@@ -107,6 +107,7 @@ struct Shoe{
 fn shoes_in_size(shoes_:Vec<Shoe>,shoe_size_:u32)->Vec<Shoe>{
     //filter也是一种迭代适配器，它返回一个新的，包含返回值为true的闭包的迭代器
     //然后通过collect收集起来，并且返回给外部调用
+    //调用into_iter来创建一个获取 vector 所有权的迭代器
     return shoes_.into_iter().filter(|s| s._size == shoe_size_).collect();
 }
 

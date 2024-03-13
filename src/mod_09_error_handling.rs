@@ -32,20 +32,27 @@ fn ch_09_02_enter(){
     //尝试打开一个不存在的文件，使用Result<T,E>来处理异常
     //File::open返回一个Result<T,E>类型，表示操作结果
     let greeting_file_result = File::open("hello.txt");
-    let mut greeting_file = match greeting_file_result {
+    let mut greeting_file = match greeting_file_result 
+    {
         // _=>(), 
         //如果成功，则将结果返回给文件句柄greeting_fiel
         Ok(file)=>file,
         //失败则发生panic
         //或者检查具体的错误类型，再做不同的处理
         //kind()函数获取具体的错误类型
-        Err(err)=>match err.kind() {
+        Err(err)=>match err.kind() 
+        {
             //如果文件未找到，则新建文件
             //因为新建文件也可能失败，所以还要做一次match
-            ErrorKind::NotFound => match File::create("hello.txt") {
-                // Ok(new_file) => write(new_file.by_ref(),b"hello rust"),
-                Ok(new_file)=>new_file,
-                Err(err) => panic!("problem creating the file:{:?}",err),
+            ErrorKind::NotFound => 
+            {
+                let result = File::create("hello.txt");
+                match result 
+                {
+                    // Ok(new_file) => write(new_file.by_ref(),b"hello rust"),
+                    Ok(new_file)=>new_file,
+                    Err(err) => panic!("problem creating the file:{:?}",err),
+                }
             },
             //其他类型的错误则panic
             other_err => panic!("problem opening the file:{:?}",other_err),
@@ -66,7 +73,6 @@ fn read_username_from_file_2()->Result<String, io::Error>{
     // let mut username = String::new();
     // let mut username_file = File::open("hello.txt")?.read_to_string(&mut username)?;
     // return Ok(username);
-
     let mut username_file = File::open("hello.txt")?;
     let mut username = String::new();
     username_file.read_to_string(&mut username)?;
@@ -74,7 +80,8 @@ fn read_username_from_file_2()->Result<String, io::Error>{
 }
 
 //错误传播
-//当调用一个可能会失败的函数时，除了在这个函数处理错误外，还可以选择外部调用方知道这个错误并如何处理，将错误的处理方式交给外部调用
+//当调用一个可能会失败的函数时，除了在这个函数处理错误外，还可以选择外部调用方知道这个错误并如何处理，
+//将错误的处理方式交给外部调用
 //从文件读用户名，返回一个Result<String,io::Error>类型
 //如果这个函数没有任何错误成功返回，调用方会收到一个包含String的Ok值
 fn read_username_from_file()->Result<String, io::Error>{

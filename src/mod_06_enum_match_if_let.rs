@@ -1,5 +1,6 @@
 use std::io;
 use std:: cmp::Ordering;
+use crate::mod_18_03_patterns_syntax::Color;
 
 pub fn enter(){
     ch_06_01_enter();
@@ -15,11 +16,12 @@ enum IpAddrKindEnum{
 }
 
 /// 包含四个不同类型成员的枚举
-enum MessageEnum{
+pub enum MessageEnum{
     Quit,
     Move {x:i32,y:i32},
     Write(String),
     ChangeColor(i32,i32,i32),
+    OtherColor(Color),
 }
 
 /// 在Rust中也可以为枚举定义方法
