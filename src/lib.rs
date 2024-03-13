@@ -5,6 +5,7 @@ mod back_of_house;
 mod front_of_house;
 pub mod mod_intergration_test;
 use back_of_house::Appetizer;
+pub mod tools;
 
 //声明一个模块，以mod关键字开始，后跟模块名
 //这里声明一个名为【前台】的模块
