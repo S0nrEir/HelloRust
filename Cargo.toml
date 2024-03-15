@@ -1,7 +1,7 @@
 #指定name，版本，license等信息
 [package]
 name = "RustBook_Instances_CN"
-version = "0.6.5"
+version = "0.7.0"
 edition = "2021"
 license="MIT"
 description = "一个包含了RustBook程序实例的学习项目，a project that contains instances of RustBook with Chinese,for studing."
