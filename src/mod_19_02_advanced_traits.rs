@@ -1,12 +1,15 @@
 use std::ops;
-use rand::rngs::adapter;
-use RustBook_Instances_CN::tools::{self, print_line};
+use RustBook_Instances_CN::tools::print_line;
+use std::fmt;
 
 pub fn enter(){
     default_generic_param_and_operator_overloading();
     print_line();
     fully_qualified_syntax();
     print_line();
+    super_trait();
+    print_line();
+    new_type();
 }
 
 //这是一个迭代器的trait
@@ -102,6 +105,13 @@ fn fully_qualified_syntax(){
     Pilot::fly(&person);
     Wizard::fly(&person);
     person.fly();//等同于Human::fly(&person);
+
+    //这里又有一个问题，当使用一个trait的非方法函数时，该怎么办呢
+    //Dog本身带一个名叫baby_name的非函数方法，并且实现了animal的同名方法
+    println!("a baby dog is called a {}",Dog::baby_name());
+    //可以通过使用完全限定语法来解决这个问题
+    //意为：调用Animal在Dog上的实现
+    println!("a baby dog is called a {}",<Dog as Animal>::baby_name());
 }
 
 trait Pilot {
@@ -141,3 +151,62 @@ impl Animal for Dog {
         String::from("puppy")
     }
 }
+
+fn super_trait(){
+
+}
+
+//有时自己的实现的trait，可能用到了别的trait的功能
+//比如OutlinePrint trait需要用到Display trait的to_string
+//可以像如下方式一样声明,有点像别的语言里的继承
+trait OutlinePrint: fmt::Display{
+    fn outline_print(&self){
+        let output = self.to_string();
+        let len = output.len();
+        //repeat方法会返回一个包含指定字符串重复指定次数的新字符串
+        //这是str类型的方法
+        println!("{}", "*".repeat(len + 4));
+        println!("*{}*", " ".repeat(len + 2));
+        println!("* {} *", output);
+        println!("*{}*", " ".repeat(len + 2));
+        println!("{}", "*".repeat(len + 4));
+    }
+}
+// 但如果要使用OutlinePrint trait，必须实现Display trait
+// 这是因为OutlinePrint trait使用了Display trait
+// 这样会报错
+// impl OutlinePrint for Point{
+// }
+//Point实现了Display trait就可以了
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+
+
+fn new_type(){
+    let w = Wrapper(vec![String::from("hello"), String::from("world")]);
+    println!("w = {}", w);
+}
+
+//如果想要在 Vec<T> 上实现 Display，而孤儿规则阻止我们直接这么做，
+//因为 Display trait 和 Vec<T> 都定义于我们的 crate 之外。
+//可以创建一个包含 Vec<T> 实例的 Wrapper 结构体
+//接着可以如列表 19-23 那样在 Wrapper 上实现 Display 并使用 Vec<T> 的值
+struct Wrapper(Vec<String>);
+impl fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+//Display 的实现使用 self.0 来访问其内部的 Vec<T>，
+//因为 Wrapper 是元组结构体而 Vec<T> 是结构体总位于索引 0 的项。
+//接着就可以使用 Wrapper 中 Display 的功能了。
+
+//此方法的缺点是，因为 Wrapper 是一个新类型，
+//它没有定义于其值之上的方法；必须直接在 Wrapper 上实现 Vec<T> 的所有方法，
+//这样就可以代理到self.0 上 —— 这就允许我们完全像 Vec<T> 那样对待 Wrapper。
+//如果希望新类型拥有其内部类型的每一个方法，为封装类型实现 Deref trait并返回其内部类型是一种解决方案。
+//如果不希望封装类型拥有所有内部类型的方法 —— 比如为了限制封装类型的行为 —— 则必须只自行实现所需的方法。
+
