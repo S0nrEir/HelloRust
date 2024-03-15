@@ -22,7 +22,7 @@ fn fn_(){
         thread::sleep(Duration::from_secs_f32(0.5));
     }
     
-    //spawn返回一个JoinHandle，调用其join函数来保证自己所属的线程在主线程退出前跑完
+    //spawn返回一个JoinHandle，调用其join方法来保证自己所属的线程在主线程退出前跑完
     //handler会阻塞当前线程以保证它所属的线程执行完毕
     //换句话说，它阻塞了主线程
     handler.join().unwrap();

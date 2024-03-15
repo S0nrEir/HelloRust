@@ -34,7 +34,7 @@ fn ch_08_01_enter(){
     v.remove(v.len() - 1);
 
     let last : usize = v.len() - 1;
-    //读vec中的元素有两种方式，一种是通过&来进行索引或使用get()函数
+    //读vec中的元素有两种方式，一种是通过&来进行索引或使用get()方法
     //get()会返回一个Option<&T>类型
     let third:&i32 = &v[last];
     let third_temp:Option<&i32> = v.get(last);
@@ -93,7 +93,7 @@ fn ch_08_01_enter(){
 fn ch_08_02_enter(){
     //对于Rust中的String，其实是一组字节(bytes)的集合
     //很多 Vec 可用的操作在 String 中同样可用，事实上 String 被实现为一个带有一些额外保证、限制和功能的字节 vector 的封装。
-    //其中一个同样作用于 Vec<T> 和 String 函数的例子是用来新建一个实例的 new 函数
+    //其中一个同样作用于 Vec<T> 和 String 方法的例子是用来新建一个实例的 new 方法
     let str = String::new();
     let data = "initial contents";
     let mut s_9 = data.to_string();
@@ -113,7 +113,7 @@ fn ch_08_02_enter(){
     s_6 = String::from("hello,");
     s_7 = String::from("world!");
     //s_6.add(&s_7);
-    s_8 = s_6 + &s_7;//s_6被移动了，不能继续使用，这是因为+使用了add函数fn add(self, s: &str) -> String
+    s_8 = s_6 + &s_7;//s_6被移动了，不能继续使用，这是因为+使用了add方法fn add(self, s: &str) -> String
 
     //使用format!宏
     let tic = String::from("tic");
@@ -146,7 +146,7 @@ fn ch_08_03_enter(){
     scores.insert(String::from("blue"), 10);
     scores.insert(String::from("yellow"), 50);
     //访问其中的值
-    //get函数返回一个Option<&V>,如果取不到相应的key，则返回None，copied函数返回一个Option<u32>而非Option<&u32>
+    //get方法返回一个Option<&V>,如果取不到相应的key，则返回None，copied方法返回一个Option<u32>而非Option<&u32>
     //并且通过调用unwrap_or()来保证取不到对应的key时将返回值设置为0
     let blue_score = scores.get(&String::from("blue")).copied().unwrap_or(0);
     output_hash_map(&scores);
@@ -174,7 +174,7 @@ fn ch_08_03_enter(){
     println!("after cover : {}",value.unwrap_or(0));
 
     //使用Entry可以只在没有对应key时插入键值对
-    //entry函数返回一个Entry类型，它描述了“可能存在也可能不存在”的值
+    //entry方法返回一个Entry类型，它描述了“可能存在也可能不存在”的值
     scores.entry(String::from("blue")).or_insert(100);
     scores.entry(String::from("yellow")).or_insert(100);
     scores.entry(String::from("green")).or_insert(500);//只有这行才会起作用因为，前两个都已经存在相应的键值对

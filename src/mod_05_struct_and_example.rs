@@ -31,7 +31,7 @@ fn ch_05_01_enter(){
     user.active = true;
     user.email = String::from("456@xxx.com");
 
-    //使用实例创建函数生成并且获取一个结构体实例
+    //使用实例创建方法生成并且获取一个结构体实例
     let mut user_2 = gen_user(String::from("789@xxx.com"),String::from("user_name"));
 
     //利用别的struct创建一个新的struct
@@ -69,7 +69,7 @@ fn tuple_struct(){
     //
 }
 
-//生成一个User实例的函数
+//生成一个User实例的方法
 fn gen_user(email:String , user_name:String)->User{
     User{
         active:true,
@@ -110,7 +110,7 @@ impl Debug for Rectangle{
 //使用impl关键词 可以使impl块中的所有内容都与Rectangle类型关联
 //这样的话就可以调用struct的area方法了
 //在impl块中，self是impl块的别名，方法的第一个参数必须有一个名为self的Self类型参数
-//所有在impl块中定义的函数都叫做关联函数，因为他们与impl后面的类型相关联
+//所有在impl块中定义的方法都叫做关联方法，因为他们与impl后面的类型相关联
 impl Rectangle{
 
     pub fn new(width_:u32,height_:u32)->Self{
@@ -135,9 +135,9 @@ impl Rectangle{
         return self.area() >= other.area();
     }
     
-    //也可以定义第一个参数不为self的函数
+    //也可以定义第一个参数不为self的方法
     //关键字Self指代impl后跟的类型
-    //使用::语法来调用这个关联函数，这表示，这个函数位于结构体的命名空间中，::用于关联函数和模块创建的命名空间
+    //使用::语法来调用这个关联方法，这表示，这个方法位于结构体的命名空间中，::用于关联方法和模块创建的命名空间
     fn square(size:u32)->Self{
         return Self { 
                 width: size,

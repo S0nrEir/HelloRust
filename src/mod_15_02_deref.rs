@@ -30,7 +30,7 @@ impl<T> Deref for MyBox<T>{
     //用于该trait的关联类型
     type Target = T;
 
-    //deref函数借用self并返回一个内部数据的引用
+    //deref方法借用self并返回一个内部数据的引用
     fn deref(&self) -> &Self::Target {
         //解引用时返回成员的引用
         return &self._x;
@@ -42,7 +42,7 @@ fn hello(name:&str){
 }
 
 fn enter_(){
-    //可以使用字符串 slice 作为参数调用 hello 函数，比如 hello("Rust");
+    //可以使用字符串 slice 作为参数调用 hello 方法，比如 hello("Rust");
     //Deref 强制转换使得用 MyBox<String> 类型值的引用调用 hello 成为可能
     // let m = MyBox::new(String::from("Rust"));//String实现的deref trait返回了&str
     // hello(&m);

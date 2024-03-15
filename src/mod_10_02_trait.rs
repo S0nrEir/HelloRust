@@ -26,7 +26,7 @@ pub trait Summary
         //...
     }
 
-    //+连接两个类型表示：函数要求泛型参数必须同时实现了Summary和Display两种trait
+    //+连接两个类型表示：方法要求泛型参数必须同时实现了Summary和Display两种trait
     fn notify_<T:Summary+Display>(item:&T)
     {
         //...
@@ -123,7 +123,7 @@ impl Tweet{
 
 pub fn enter(){
 
-    //其他依赖本crate的crate也可以将Summary引入作用域以实现相应的Summarize函数
+    //其他依赖本crate的crate也可以将Summary引入作用域以实现相应的Summarize方法
     //但这里有一个限制，就是当要实现trait的类型位于crate的本地作用域时，才能为其实现trait
     //比如可以为Tweet实现标准库中的Display Trait,也可以在该模块的作用域中为Vec<T>实现SummaryTrait，这是因为SummaryTrait位于本地作用域
     //但不能为外部类型实现外部Trait，比如为Vec<T>实现DisplayTrait
@@ -148,7 +148,7 @@ impl<T> Pair<T>{
     }
 }
 
-//加上了trait bound后，对于Pairt<T>类型，他的泛型T必须实现Display和PartialOrder两种trait，才会生成cmp_display函数
+//加上了trait bound后，对于Pairt<T>类型，他的泛型T必须实现Display和PartialOrder两种trait，才会生成cmp_display方法
 impl<T:Display+PartialOrd> Pair<T>{
     fn cmp_display(&self) {
         if self.x >= self.y {

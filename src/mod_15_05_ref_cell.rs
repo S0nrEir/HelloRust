@@ -107,12 +107,12 @@ mod tests{
             // self.test_mut_borrow_mut();
             // return;
             //此处报错，借用检查器不允许这样做
-            //因为send函数获取了self的不可变引用，也不能使用&mut self代替，因为这不符合Messenger trait的签名
-            //因为_sent_messages要改变自身的值（push函数），
+            //因为send方法获取了self的不可变引用，也不能使用&mut self代替，因为这不符合Messenger trait的签名
+            //因为_sent_messages要改变自身的值（push方法），
             //此时就需要一个在不可变的情况仍能改变自身值得方法，也就是RefCell<T>
             //无法使用&mut self，也要符合trait签名的实现方法之一就是：使用RefCell
             // self._sent_messages.push(String::from(message));
-            //borrow_mut函数可以获得RefCell中值的可变引用，接着对vector的可变引用调用push
+            //borrow_mut方法可以获得RefCell中值的可变引用，接着对vector的可变引用调用push
             self._sent_messages.borrow_mut().push(String::from(message));
         }
     }

@@ -48,6 +48,7 @@ mod mod_18_01_all_the_places_for_patterns;
 mod mod_18_02_refutability;
 mod mod_18_03_patterns_syntax;
 mod mod_19_01_unsafe_rust;
+mod mod_19_02_advanced_traits;
 // mod tools;
 
 fn main(){
@@ -86,5 +87,6 @@ fn main_enter() {
     // mod_18_01_all_the_places_for_patterns::enter();
     // mod_18_02_refutability::enter();
     // mod_18_03_patterns_syntax::enter();
-    mod_19_01_unsafe_rust::enter();
+    // mod_19_01_unsafe_rust::enter();
+    mod_19_02_advanced_traits::enter();
 }

@@ -7,7 +7,7 @@ pub fn enter(){
 
     let a = CustomSmartPointer{ data:String::from("my stuff")};
     let b = CustomSmartPointer{ data:String::from("other stuff")};
-    //error：不允许显式调用析构函数，因为rust会在代码段末尾自动调用b.drop()
+    //error：不允许显式调用析构方法，因为rust会在代码段末尾自动调用b.drop()
     //b.drop();
 
     //如果需要显示地调用drop，可以使用std::mem::drop，这可以提前释放一个pointer指向的内存，

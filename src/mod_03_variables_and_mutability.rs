@@ -131,26 +131,26 @@ fn ch_03_04(){
 }
 
 fn ch_03_03(){
-    //Rust中所有的函数和变量遵循snake_case规则，即全部小写，以下划线分隔
-    //fn关键字声明新函数
+    //Rust中所有的方法和变量遵循snake_case规则，即全部小写，以下划线分隔
+    //fn关键字声明新方法
     let result = add_two_number(1,1);
     println!("reuslt of function add(1,1) is {result}");
 }
 
-//带有一个i32类型参数的函数
+//带有一个i32类型参数的方法
 fn another_function(x:i32){
     println!("another_function,x->{x}");   
 }
 
-//***Rust比较特殊的一点是，函数的返回值等同于函数体最后一个表达式的值
-//带有一个u32参数，返回值类型为i32的函数
+//***Rust比较特殊的一点是，方法的返回值等同于方法体最后一个表达式的值
+//带有一个u32参数，返回值类型为i32的方法
 fn yet_another_function(val:i32)->i32{
     //下面两种方式都可以作为返回值
     //val;//将参数val作为返回值
     5//整型5作为返回值
 }
 
-//使用return关键字作为返回值的函数
+//使用return关键字作为返回值的方法
 fn yet_another_function_return_with_bool(val:i32)->bool{
     return false;
 }
@@ -162,7 +162,7 @@ fn add_two_number(x:i32, y:i32)->i32{
 fn ch_03_02(){
     //Rust的数据类型分为两种子集：标量和复合
     //Rust和C++一样，是静态类型语言，在编译时必须知道变量的类型
-    //通常情况下，根据值和使用方式，编译器可以推断出想要使用的类型，但在某些情况下必须注明，比如多种类型均有可能时（使用parse函数将String转换为数字时）
+    //通常情况下，根据值和使用方式，编译器可以推断出想要使用的类型，但在某些情况下必须注明，比如多种类型均有可能时（使用parse方法将String转换为数字时）
     let number :u32 = "42".parse().expect("cast faild");
     //标量类型代表一个单独的值，整型、浮点、布尔、字符
     let f : bool = false;//一个bool类型

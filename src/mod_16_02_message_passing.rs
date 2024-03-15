@@ -24,11 +24,11 @@ fn _fn(){
         tx.send(val);
     });
 
-    //使用接收端recv函数来接受
+    //使用接收端recv方法来接受
     // let recived = rx.recv().unwrap();
     // println!("got: {}",recived);
     //实际情况中，如果unwrap和expect可能会引发panic，导致程序崩溃，所以使用模式匹配检查一下其值
-    //recv函数会阻塞当前线程直到从信道中接收一个值
+    //recv方法会阻塞当前线程直到从信道中接收一个值
     // if let Ok(recived) = rx.recv(){
     //     println!("got:{}",recived);
     // }
@@ -61,7 +61,7 @@ fn fn_(){
         let val = String::from("hi from spawned thread");
         tx.send(val).unwrap();
         //将值发送到另一个线程后，那个线程可能会在当前线程再次使用它时将其丢弃或修改
-        //这里会报错：send函数会获取val的所有权并将它的所有权转移给接收者
+        //这里会报错：send方法会获取val的所有权并将它的所有权转移给接收者
         // println!("{}", val);
     });
 
@@ -94,7 +94,7 @@ fn _fn_(){
 //通过克隆发送者来创建多个producer
 fn __fn(){
     let (tx,rx) = mpsc::channel();
-    //使用clone函数返回一个可以传递给新建线程的发送端句柄
+    //使用clone方法返回一个可以传递给新建线程的发送端句柄
     let tx_1 = tx.clone();
     let handler_1 = thread::spawn(move ||{
         let vals = vec![

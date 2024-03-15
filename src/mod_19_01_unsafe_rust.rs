@@ -2,24 +2,24 @@ use RustBook_Instances_CN::tools;
 use std::{ptr, slice};
 
 //本章的关键在于：你要保证在不安全的代码块中访问的数据和操作都是有效、安全的（比如保证裸指针指向了有效地址）
-//使用extern关键字集成C标准库中的abs函数
-//extern 块中声明的函数在 Rust 代码中总是不安全的。
+//使用extern关键字集成C标准库中的abs方法
+//extern 块中声明的方法在 Rust 代码中总是不安全的。
 //因为其他语言不会强制执行 Rust 的规则且 Rust 无法检查它们，所以要确保extern中的内容是安全的
 extern "C"{
     fn abs(input:i32)->i32;
 }
 
-//也可以使用 extern 来创建一个允许其他语言调用 Rust 函数的接口
-// /在如下的例子中，一旦其编译为动态库并从 C 语言中链接，call_from_c 函数就能够在 C 代码中访问
-//另外还要增加[no_mangle]注解来告诉编译器不要修改此函数的名称
+//也可以使用 extern 来创建一个允许其他语言调用 Rust 方法的接口
+// /在如下的例子中，一旦其编译为动态库并从 C 语言中链接，call_from_c 方法就能够在 C 代码中访问
+//另外还要增加[no_mangle]注解来告诉编译器不要修改此方法的名称
 #[no_mangle]
 extern "C"{} fn call_from_c(){
     println!("just called a rust function from c");
 }
 
-//在 extern "C" 块中，列出了我们希望能够调用的另一个语言中的外部函数的签名和名称。
-//"C"部分定义了外部函数所使用的应用二进制接口（application binary interface，ABI）
-//ABI 定义了如何在汇编语言层面调用此函数。"C" ABI 是最常见的，并遵循 C 编程语言的 ABI。
+//在 extern "C" 块中，列出了我们希望能够调用的另一个语言中的外部方法的签名和名称。
+//"C"部分定义了外部方法所使用的应用二进制接口（application binary interface，ABI）
+//ABI 定义了如何在汇编语言层面调用此方法。"C" ABI 是最常见的，并遵循 C 编程语言的 ABI。
 
 //rust中全局变量被称为静态变量
 //这是一个不可变静态变量
@@ -34,7 +34,7 @@ static mut COUNTER:u32 = 0;
 //在不安全的代码块中，可以做的操作有：
 //这五个操作不会被rust进行安全检查，其他的则平时一样
 // 解引用裸指针
-// 调用不安全的函数或方法
+// 调用不安全的方法或方法
 // 访问或修改可变静态变量
 // 实现不安全 trait
 // 访问 union 的字段
@@ -87,8 +87,8 @@ fn raw_pointer(){
     //使用裸指针的一些主要场景是：调用C代码接口或构建借用检查器无法理解的安全抽象或者其他的
 }
 
-//使用unsafe开头声明一个不安全函数，这样可以在不安全代码块中调用它
-//不安全函数本身就是不安全的，所以在函数体中进行不安全的操作时无需增加unsafe代码块
+//使用unsafe开头声明一个不安全方法，这样可以在不安全代码块中调用它
+//不安全方法本身就是不安全的，所以在方法体中进行不安全的操作时无需增加unsafe代码块
 unsafe fn unsafe_function(){
     // println!("this is a unsafe function");
     let mut v = vec![1,2,3,4,5,6];
@@ -117,7 +117,7 @@ fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
 
     unsafe {
         return (
-            //from_raw_parts_mut函数需要一个裸指针和一个长度作为参数，并返回一个slice
+            //from_raw_parts_mut方法需要一个裸指针和一个长度作为参数，并返回一个slice
             slice::from_raw_parts_mut(ptr, mid),
             //使用ptr.add()来让指针偏移到mid的位置，获取剩余的slice
             slice::from_raw_parts_mut(ptr.add(mid), len - mid),
@@ -149,7 +149,7 @@ unsafe trait Test_Trait{
 }
 
 unsafe impl Test_Trait for i32{
-    
+
 }
 
 fn unsafe_trait(){

@@ -5,7 +5,7 @@ struct Point<T>{
     y:T,
 }
 
-//泛型函数
+//泛型方法
 //注意必须在impl关键字后边跟上<T>
 impl<T> Point<T>{
     fn get_x(&self)->&T{
@@ -54,7 +54,7 @@ pub fn enter(){
 }
 
 //在Rust中使用泛型
-//只要在函数名后跟T即可
+//只要在方法名后跟T即可
 //这里的代码是有问题的，无法通过编译，因为不知道T的类型是否可以进行比较
 // fn largest<T>(list: &[T]) -> &T {
 //     let mut largest = &list[0];

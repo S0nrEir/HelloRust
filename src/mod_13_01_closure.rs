@@ -33,7 +33,7 @@ pub fn enter(){
             ShirtColor::Blue,
     ]);
 
-    //将一个闭包函数放到一个变量里
+    //将一个闭包方法放到一个变量里
     let expensive_closure = |num:u32|->u32{//也可以注明参数类型
         println!("calculating slowly...");
         thread::sleep(Duration::from_secs(2));
@@ -41,7 +41,7 @@ pub fn enter(){
     };
     //更多的闭包例子：
     let add_one_v2 = |x:u32|->u32{ x+1 };
-    //在正确的上下文中，下面两个闭包函数的参数和返回值类型将被rust推断出来，所以不用注明
+    //在正确的上下文中，下面两个闭包方法的参数和返回值类型将被rust推断出来，所以不用注明
     // let add_one_v3 = |x| { return x+1 };
     // let add_one_v4 = |x| x+1;
 
@@ -79,12 +79,12 @@ impl Inventory{
     }
 
     pub fn give_away(&self,user_preference:Option<ShirtColor>)->ShirtColor{
-        //Option的unwrap_or_else函数，如果Option的成员是Some则返回Some<T>
-        //如果是None，则调用匿名函数并返回匿名函数中的值
-        //匿名函数的签名是()->T，这是由Option决定的
+        //Option的unwrap_or_else方法，如果Option的成员是Some则返回Some<T>
+        //如果是None，则调用匿名方法并返回匿名方法中的值
+        //匿名方法的签名是()->T，这是由Option决定的
         return user_preference.unwrap_or_else(|| self.most_stocked());
-        //Rust中的闭包形式是：|参数1，参数2，参数3，...|{函数体}
-        //对于单行函数，也可以不加花括号，比如|参数1，参数2，...| 函数体
+        //Rust中的闭包形式是：|参数1，参数2，参数3，...|{方法体}
+        //对于单行方法，也可以不加花括号，比如|参数1，参数2，...| 方法体
     }
 
     fn most_stocked_()->ShirtColor{

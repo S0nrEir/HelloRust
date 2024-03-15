@@ -73,7 +73,7 @@ impl Iterator for TempStructIter{
     //type Item和Self::Item定义了trait的关联类型
     type Item = i32;
 
-    //调用next函数的方法被称为消费适配器，因为调用他们会“消耗”迭代器
+    //调用next方法的方法被称为消费适配器，因为调用他们会“消耗”迭代器
     //
     fn next(&mut self) -> Option<Self::Item> {
         if self._is_over_len{

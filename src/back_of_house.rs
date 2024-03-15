@@ -9,7 +9,7 @@ pub fn to_string(){
 fn fix_incorrect_order(){
     println!("fix incorrect order");
     cook_order();
-    //使用super来调用父模块（crate根）的函数
+    //使用super来调用父模块（crate根）的方法
     super::deliver_order();
 }
 
@@ -31,7 +31,7 @@ impl Breakfast {
         return format!("toast is {}, seasonal fruit is {}",self.toast, self.seasonal_fruit);
     }
     
-    //注意，因为Breakfast结构体拥有私有字段，所以要提供一个公有的关联函数来构造一个Breakfast的实例
+    //注意，因为Breakfast结构体拥有私有字段，所以要提供一个公有的关联方法来构造一个Breakfast的实例
     pub fn summer(toast: &str)->Breakfast{
         return Breakfast{
             toast:String::from(toast),

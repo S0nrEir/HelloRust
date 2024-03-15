@@ -48,7 +48,7 @@ fn func(){
 }
 
 fn ref_count_print(){
-    //对于一个引用的计数，可以通过Rc::Strong_count函数获取
+    //对于一个引用的计数，可以通过Rc::Strong_count方法获取
     let a = Rc::new(List::Cons((5), (Rc::new(List::Cons((10), (Rc::new(List::Nil)))))));
     println!("count after creating a = {}",Rc::strong_count(&a));
     println!("value of a is {}",a);

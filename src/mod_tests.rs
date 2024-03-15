@@ -6,7 +6,7 @@ use crate::mod_05_struct_and_example::Rectangle;
 
 
 //单元测试与要测试的代码一同放在src目录下相同的文件中，
-//在要测试的文件中创建包含测试函数的tests模块，并使用cfg(test)标注模块，就像下面这样
+//在要测试的文件中创建包含测试方法的tests模块，并使用cfg(test)标注模块，就像下面这样
 
 //测试模块的#[cfg(test)]注解告诉Rust只在执行cargo test的时候才编译和运行测试代码
 #[cfg(test)]
@@ -15,7 +15,7 @@ pub fn run(){
     it_works();
 }
 
-//这表示函数为一个测试函数
+//这表示方法为一个测试方法
 //可以运行cargo test查看测试结果
 #[test]
 fn it_works(){
@@ -58,11 +58,11 @@ fn larger_can_hold_smaller(){
     // assert!(smaller.can_hold(&larger),"bigger! Can't hold!");
 }
 
-//可以通过cargo test 【函数名】的方式来运行指定的函数测试
+//可以通过cargo test 【方法名】的方式来运行指定的方法测试
 //cargo test 【模块名称】来运行一个模块中的所有测试
-//cargo test 【work】 运行所有函数名中包含work的测试
+//cargo test 【work】 运行所有方法名中包含work的测试
 //cargo test -- -- ignored 只运行被忽略的测试
-//默认情况Rust会运行所有打了test属性标记的函数测试
+//默认情况Rust会运行所有打了test属性标记的方法测试
 
 //对于想要忽略的测试，在test后添加ignore属性标记即可
 #[test]

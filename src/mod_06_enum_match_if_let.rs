@@ -36,7 +36,7 @@ fn ch_06_01_enter(){
     //使用这样的方式声明枚举变量
     let none : IpAddrKindEnum = IpAddrKindEnum::None;
     //对指定了具体类型的变量，以这样的方式声明
-    //IpAddrKindEnum::V4是一个获取string参数然后返回一个IpAddrKindEnum类型实例的函数
+    //IpAddrKindEnum::V4是一个获取string参数然后返回一个IpAddrKindEnum类型实例的方法
     let four : IpAddrKindEnum = IpAddrKindEnum::V4(String::from("123.0.0.1"));
     let four_another : IpAddrKindEnum = IpAddrKindEnum::V4_u8( 127 , 0 , 0 , 0 );
     let six : IpAddrKindEnum = IpAddrKindEnum::V6(String::from("::1"));
