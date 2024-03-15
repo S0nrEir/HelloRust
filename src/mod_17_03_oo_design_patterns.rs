@@ -1,4 +1,4 @@
-use RustBook_Instances_CN::{Post, NewPost};
+use rustbook_instances_cn::{Post, NewPost};
 
 pub fn enter(){
     _fn();

@@ -1,4 +1,4 @@
-use RustBook_Instances_CN::tools;
+use rustbook_instances_cn::tools;
 use std::{ptr, slice};
 
 //本章的关键在于：你要保证在不安全的代码块中访问的数据和操作都是有效、安全的（比如保证裸指针指向了有效地址）
