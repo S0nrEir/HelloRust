@@ -1,5 +1,5 @@
 use std::ops;
-use rustbook_instances_cn::tools::print_line;
+use RustBook_Instances_CN::tools::print_line;
 use std::fmt;
 
 pub fn enter(){

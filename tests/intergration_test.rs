@@ -7,7 +7,7 @@
 //在lib中对外声明mod，然后在tests中从根crate目录引用即可
 //要注意的是对于src目录，引用根路径从crate开始，而tests和src平级，他的根从tests开始
 //cargo test --test integration_test运行指定模块的集成测试
-use rustbook_instances_cn::mod_intergration_test;
+use RustBook_Instances_CN::mod_intergration_test;
 
 // #[test]
 fn do_test(){
