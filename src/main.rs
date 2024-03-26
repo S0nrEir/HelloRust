@@ -51,6 +51,7 @@ mod mod_19_01_unsafe_rust;
 mod mod_19_02_advanced_traits;
 mod mod_19_03_advanced_type;
 mod mod_19_04_advanced_functions_and_closures;
+mod mod_19_05_macros;
 // mod tools;
 
 fn main(){
@@ -92,5 +93,6 @@ fn main_enter() {
     // mod_19_01_unsafe_rust::enter();
     // mod_19_02_advanced_traits::enter();
     // mod_19_03_advanced_type::enter();
-    mod_19_04_advanced_functions_and_closures::enter();
+    // mod_19_04_advanced_functions_and_closures::enter();
+    mod_19_05_macros::enter();
 }
